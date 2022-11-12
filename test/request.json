@@ -1,0 +1,48 @@
+{
+    "billingAddress": {
+        "firstName": "Max",
+        "lastName": "Mustermann",
+        "address1": "Mustermannstraße 2/1",
+        "address2": "",
+        "country": "AT",
+        "postcode": "1111",
+        "city": "Musterort"
+    },
+    "shippingAddress": {
+        "firstName": "Max",
+        "lastName": "Mustermann",
+        "address1": "Mustermannstraße 2/1",
+        "address2": "",
+        "country": "AT",
+        "postcode": "1111",
+        "city": "Musterort"
+    },
+    "orderDateString": "01.01.2022",
+    "itemsTotalPrice": "310.50",
+    "orderShipping": "5.00",
+    "cartDiscount": "20.00",
+    "orderTotal": "295.50",
+    "orderItems": [
+        {
+            "brandName": "brandname",
+            "name": "shopping item",
+            "sku": "1",
+            "quantity": "1",
+            "lineTotal": "10.00"
+        },
+        {
+            "brandName": "brandname",
+            "name": "shopping item",
+            "sku": "2",
+            "quantity": "10",
+            "lineTotal": "100.00"
+        },
+        {
+            "brandName": "brandname",
+            "name": "shopping item",
+            "sku": "3",
+            "quantity": "5",
+            "lineTotal": "200.50"
+        }
+    ]
+}

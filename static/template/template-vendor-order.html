@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<style>
+  .title-tiny {
+    font-size: 10px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+
+  .address {
+    position: relative;
+    width: 50%;
+    float: left;
+  }
+
+  .address p:not(:first-child) {
+    margin: 5px 0 5px 0;
+  }
+
+  .item-container div p {
+    margin: 1px 0 1px 0;
+  }
+
+  .item-container div:not(:first-child) p {
+    margin-bottom: 25px;
+  }
+
+  .low-spacing div p {
+    margin: 6px 0 6px 0;
+  }
+</style>
+
+<head>
+  <meta charset="utf-8" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet" />
+</head>
+
+<body style="font-family: 'Quicksand', 'sans-serif'; color: #0e3650; font-size: 14px">
+  <div style="width: 100%">
+    <img style="display: block; margin-left: auto; margin-right: auto; height: 100px; width: auto"
+      src="data:image/png;base64,{{logo}}" alt="logo" />
+
+    <p style="font-size: 32px">
+      Danke {{billingAddress.firstName}},<br />
+      für deine Bestellung!
+    </p>
+    <p style="font-size: 26px">
+      Hiermit bestätigen wir deine Bestellung bei <strong>Generic Company</strong>. Bitte überprüfe noch
+      einmal unten aufgelistet deine bestellten Artikel und deine angegebene Lieferadresse.
+    </p>
+  </div>
+  <span> Bestellung vom {{formatOrderDate orderDateString}} </span>
+  <div style="width: 100%">
+    <div class="address">
+      <p class="title-tiny">Angegebene Rechnungsadresse</p>
+      {{#with billingAddress}}
+      <p>{{firstName}} {{lastName}}</p>
+      <p>{{address1}}</p>
+      <p>{{address2}}</p>
+      <p>
+        {{country}}{{#if (areBothValuesPresent country postcode)}}-{{/if}}{{postcode}} {{city}}
+      </p>
+      {{/with}}
+    </div>
+    <div class="address">
+      <p class="title-tiny">Angegebene Lieferadresse</p>
+      {{#with shippingAddress}}
+      <p>{{firstName}} {{lastName}}</p>
+      <p>{{address1}}</p>
+      <p>{{address2}}</p>
+      <p>
+        {{country}}{{#if (areBothValuesPresent country postcode)}}-{{/if}}{{postcode}} {{city}}
+      </p>
+      {{/with}}
+    </div>
+  </div>
+  <div style="width: 100%; clear: left">
+    <div class="title-tiny" style="position: relative; width: 40%; float: left">
+      <p>Bestellter Artikel</p>
+    </div>
+    <div class="title-tiny" style="position: relative; width: 20%; float: left">
+      <p style="text-align: center">Artikelnummer</p>
+    </div>
+    <div class="title-tiny" style="position: relative; width: 20%; float: left">
+      <p style="text-align: center">Menge</p>
+    </div>
+    <div class="title-tiny" style="position: relative; width: 20%; float: left">
+      <p style="text-align: center">Preis</p>
+    </div>
+  </div>
+  {{#each orderItems}}
+  <div class="item-container" style="width: 100%; clear: left">
+    <div style="width: 100%; float: left; font-weight: bold; color: #293447">
+      <p>{{this.brandName}}</p>
+    </div>
+    <div style="width: 40%; float: left">
+      <p>{{this.name}}</p>
+    </div>
+    <div style="width: 20%; float: left">
+      <p style="text-align: center">{{#if this.sku}}#{{this.sku}}{{/if}}</p>
+    </div>
+    <div style="width: 20%; float: left">
+      <p style="text-align: center">{{this.quantity}}</p>
+    </div>
+    <div style="width: 13.7%; float: left">
+      <p style="text-align: right">{{formatCurrency this.lineTotal}}</p>
+    </div>
+  </div>
+  {{/each}}
+  <div class="low-spacing" style="width: 100%; clear: left">
+    <div style="width: 80%; float: left">
+      <p style="text-align: right; font-weight: bold">Zwischensumme</p>
+    </div>
+    <div style="width: 20%; float: left">
+      <p style="text-align: center">{{formatCurrency itemsTotalPrice}}</p>
+    </div>
+  </div>
+
+  <div class="low-spacing" style="width: 100%; clear: left">
+    <div style="width: 80%; float: left">
+      <p style="text-align: right; font-weight: bold">Versandkosten</p>
+    </div>
+    <div style="width: 13.7%; float: left">
+      <p style="text-align: right">{{formatCurrency orderShipping}}</p>
+    </div>
+  </div>
+
+  <div class="low-spacing" style="width: 100%; clear: left">
+    <div style="width: 80%; float: left">
+      <p style="text-align: right; font-weight: bold">Gutschreinrabatt</p>
+    </div>
+    <div style="width: 13.7%; float: left;">
+      <p style="text-align: right">
+        {{#if cartDiscount}}-{{/if}}{{formatCurrency cartDiscount}}
+      </p>
+    </div>
+  </div>
+
+  <div class="low-spacing" style="width: 100%; clear: left">
+    <div style="width: 80%; float: left">
+      <p style="text-align: right; font-weight: bold">Total</p>
+    </div>
+    <div style="width: 13.7%; float: left">
+      <p style="text-align: right; font-weight: bold">{{formatCurrency orderTotal}}</p>
+    </div>
+  </div>
+
+  <div id="footer" style="width: 100%; height: 40px; clear: left">
+    <div style="width: 33.33%; float: left; font-size: 8px; text-align: left">
+      <br />
+      <br />
+      <span class="pageNumber"></span>/<span class="totalPages"></span>
+    </div>
+    <div style="width: 33.33%; float: left; font-size: 8px; text-align: center">
+      Generic GmbH
+      <br />
+      Generic Street
+      <br />
+      2222 Nowhere
+      <br />
+      www.generic.com
+    </div>
+    <div style="width: auto; float: right; font-size: 8px; text-align: center">
+      {{vendor.pageTitle}}
+      <br />
+      {{vendor.address}}
+      <br />
+      {{vendor.postcode}} {{vendor.country}}
+    </div>
+  </div>
+</body>
+
+</html>
