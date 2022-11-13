@@ -8,4 +8,6 @@ Generates an invoice from provided json data via post request.
 curl -X POST -H 'Content-Type: application/json' -d @./test/request.json http://localhost:3002 --output ./test/result/result.pdf
 ```
 ## Preview
-<img align="center"  src="./static/img/preview.png">
+<p align="center">
+    <img src="./static/img/preview.png">
+</p>
