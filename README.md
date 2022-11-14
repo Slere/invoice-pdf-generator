@@ -1,5 +1,5 @@
 # Invoice-pdf-Generator
-Generates an invoice from provided json data via post request.
+Generates an invoice from json data provided via post request and returns it as pdf file.
 ## Testing
 
 
